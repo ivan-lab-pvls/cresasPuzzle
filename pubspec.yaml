@@ -1,0 +1,85 @@
+name: kresas_app
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  auto_route: ^7.8.4
+  flutter_svg: ^2.0.9
+  flutter_bloc: ^8.1.3
+  get_it: ^7.6.4
+  flutter_launcher_icons: ^0.13.1
+  shared_preferences: ^2.2.2
+  firebase_messaging: ^14.2.2
+  flutter_inappwebview: ^5.8.0
+  firebase_core: ^2.21.0
+  firebase_remote_config: ^4.3.3
+  overlay_support: ^2.1.0
+  flutter_local_notifications: ^9.8.0+1
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  auto_route_generator: ^7.1.1
+  build_runner: ^2.4.4
+  
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+     - assets/images/
+     - assets/images/elements/
+     - assets/images/home/
+     - assets/images/puzzle/
+     - assets/images/puzzle/1/
+     - assets/images/puzzle/2/
+     - assets/images/puzzle/3/
+     - assets/images/puzzle/4/
+     - assets/images/puzzle/5/
+     - assets/images/puzzle/6/
+     - assets/images/puzzle/7/
+     - assets/images/puzzle/8/
+     - assets/images/puzzle/9/
+     - assets/images/puzzle/10/
+     - assets/images/puzzle/11/
+     - assets/images/puzzle/12/
+     - assets/images/puzzle/13/
+     - assets/images/puzzle/14/
+     - assets/images/puzzle/15/
+     - assets/images/puzzle/16/
+     - assets/images/puzzle/17/
+     - assets/images/puzzle/18/
+     - assets/images/puzzle/19/
+     - assets/images/puzzle/20/
+     - assets/images/statue/
+     - assets/images/victory/
+
+  fonts:
+    - family: Podkova
+      fonts:
+        - asset: fonts/Podkova-Regular.ttf
+        - asset: fonts/Podkova-Medium.ttf
+        - asset: fonts/Podkova-Bold.ttf
+        - asset: fonts/Podkova-SemiBold.ttf
+        - asset: fonts/Podkova-ExtraBold.ttf
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/app_icon.png"
