@@ -28,6 +28,8 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We need data to analize crashlogs of app</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

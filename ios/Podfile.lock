@@ -1,4 +1,20 @@
 PODS:
+  - advertising_id (0.0.1):
+    - Flutter
+  - affise_attribution_lib (1.0.0):
+    - AffiseInternal (= 1.6.27)
+    - Flutter
+  - AffiseAttributionLib (1.6.27)
+  - AffiseInternal (1.6.27):
+    - AffiseAttributionLib (= 1.6.27)
+    - AffiseSKAdNetwork (= 1.6.27)
+  - AffiseModule/Advertising (1.6.27):
+    - AffiseAttributionLib (= 1.6.27)
+  - AffiseModule/Status (1.6.27):
+    - AffiseAttributionLib (= 1.6.27)
+  - AffiseSKAdNetwork (1.6.27)
+  - app_tracking_transparency (0.0.1):
+    - Flutter
   - Firebase/CoreOnly (10.22.0):
     - FirebaseCore (= 10.22.0)
   - Firebase/Messaging (10.22.0):
@@ -99,6 +115,11 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
+  - advertising_id (from `.symlinks/plugins/advertising_id/ios`)
+  - affise_attribution_lib (from `.symlinks/plugins/affise_attribution_lib/ios`)
+  - AffiseModule/Advertising (= 1.6.27)
+  - AffiseModule/Status (= 1.6.27)
+  - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
@@ -109,6 +130,10 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AffiseAttributionLib
+    - AffiseInternal
+    - AffiseModule
+    - AffiseSKAdNetwork
     - Firebase
     - FirebaseABTesting
     - FirebaseCore
@@ -124,6 +149,12 @@ SPEC REPOS:
     - PromisesObjC
 
 EXTERNAL SOURCES:
+  advertising_id:
+    :path: ".symlinks/plugins/advertising_id/ios"
+  affise_attribution_lib:
+    :path: ".symlinks/plugins/affise_attribution_lib/ios"
+  app_tracking_transparency:
+    :path: ".symlinks/plugins/app_tracking_transparency/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
@@ -140,6 +171,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
 
 SPEC CHECKSUMS:
+  advertising_id: 31c738918c2e04d86d80c293357e61e06e87df74
+  affise_attribution_lib: d816d52c05fc15d6ac9743eb7a4bb5ec2789e5b2
+  AffiseAttributionLib: 7ef8b9f1c6af2ba1c300c3e84f8cf3c07c61e3ba
+  AffiseInternal: d8b20f4ec06936485ac7610795ee1e58789cc47f
+  AffiseModule: 5b1945238a2f0b4deae394348caf5a93b56597df
+  AffiseSKAdNetwork: 35f4279bc6ce253ce4328c34acf72e0bdbbbdb9f
+  app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
   Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
   firebase_core: 100945864b4aedce3cfef0c62ab864858bf013cf
   firebase_messaging: e65050bf9b187511d80ea3a4de7cf5573d2c7543
@@ -161,6 +199,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
 
-PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+PODFILE CHECKSUM: 25908036d70a5a22125f3f8bbb35e6085a898bf7
 
 COCOAPODS: 1.13.0
