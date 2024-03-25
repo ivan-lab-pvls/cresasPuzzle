@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:affise_attribution_lib/affise.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:kresas_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -15,7 +17,10 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
+  if (await AppTrackingTransparency.trackingAuthorizationStatus ==
+      TrackingStatus.notDetermined) {
+    await AppTrackingTransparency.requestTrackingAuthorization();
+  }
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseRemoteConfig.instance.setConfigSettings(RemoteConfigSettings(
     fetchTimeout: const Duration(seconds: 25),
@@ -23,7 +28,7 @@ void main() async {
   ));
   await Notify().activate();
   await FirebaseRemoteConfig.instance.fetchAndActivate();
-
+  await initAffise();
   runApp(FutureBuilder<bool>(
     future: checkDailyReward(),
     builder: (context, snapshot) {
@@ -50,6 +55,27 @@ void main() async {
       }
     },
   ));
+}
+
+Future<void> das() async {
+  final TrackingStatus status =
+      await AppTrackingTransparency.requestTrackingAuthorization();
+  print(status);
+}
+
+Future<void> initAffise() async {
+  das();
+  Affise.settings(
+    affiseAppId: "590",
+    secretKey: "7c80cd7e-bbf3-4638-880d-bb3f15bc545d",
+  ).start();
+  Affise.moduleStart(AffiseModules.ADVERTISING);
+  Affise.getModulesInstalled().then((modules) {
+    print("Modules: $modules");
+  });
+  Affise.getStatus(AffiseModules.ADVERTISING, (data) {
+    print(data);
+  });
 }
 
 String kresas = '';

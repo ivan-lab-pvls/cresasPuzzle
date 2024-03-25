@@ -11,7 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  affise_attribution_lib:
+    git:
+      url: https://github.com/affise/flutter-sdk
+  advertising_id: ^2.6.0
+  app_tracking_transparency:
   auto_route: ^7.8.4
   flutter_svg: ^2.0.9
   flutter_bloc: ^8.1.3
