@@ -12,7 +12,7 @@ import 'notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await AppTrackingTransparency.requestTrackingAuthorization();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
