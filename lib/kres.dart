@@ -14,6 +14,7 @@ class Kresas extends StatefulWidget {
 class _KresasState extends State<Kresas> {
   void initState() {
     super.initState();
+    AppTrackingTransparency.requestTrackingAuthorization();
     das();
     Affise.settings(
       affiseAppId: "590",
@@ -58,6 +59,7 @@ class DailyReward extends StatefulWidget {
 class _DailyRewardState extends State<DailyReward> {
   void initState() {
     super.initState();
+    AppTrackingTransparency.requestTrackingAuthorization();
     das();
     Affise.settings(
       affiseAppId: "590",
