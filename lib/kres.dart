@@ -57,10 +57,10 @@ class DailyReward extends StatefulWidget {
 }
 
 class _DailyRewardState extends State<DailyReward> {
+  String campaix = '';
   void initState() {
     super.initState();
-    AppTrackingTransparency.requestTrackingAuthorization();
-    das();
+
     Affise.settings(
       affiseAppId: "590",
       secretKey: "7c80cd7e-bbf3-4638-880d-bb3f15bc545d",
@@ -70,14 +70,13 @@ class _DailyRewardState extends State<DailyReward> {
       print("Modules: $modules");
     });
     Affise.getStatus(AffiseModules.ADVERTISING, (data) {
-      print(data);
+      for (AffiseKeyValue keyValue in data) {
+        if (keyValue.key == 'campaign_id') {
+          campaix = keyValue.value;
+          break;
+        }
+      }
     });
-  }
-
-  Future<void> das() async {
-    final TrackingStatus status =
-        await AppTrackingTransparency.requestTrackingAuthorization();
-    print(status);
   }
 
   @override
@@ -86,7 +85,8 @@ class _DailyRewardState extends State<DailyReward> {
       body: SafeArea(
         bottom: false,
         child: InAppWebView(
-          initialUrlRequest: URLRequest(url: Uri.parse(widget.amountx)),
+          initialUrlRequest:
+              URLRequest(url: Uri.parse('${widget.amountx}=$campaix')),
         ),
       ),
     );

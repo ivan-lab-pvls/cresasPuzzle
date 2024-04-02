@@ -12,20 +12,16 @@ import 'notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AppTrackingTransparency.requestTrackingAuthorization();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  if (await AppTrackingTransparency.trackingAuthorizationStatus ==
-      TrackingStatus.notDetermined) {
-    await AppTrackingTransparency.requestTrackingAuthorization();
-  }
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseRemoteConfig.instance.setConfigSettings(RemoteConfigSettings(
     fetchTimeout: const Duration(seconds: 25),
     minimumFetchInterval: const Duration(seconds: 25),
   ));
+  await das();
   await Notify().activate();
   await FirebaseRemoteConfig.instance.fetchAndActivate();
   runApp(FutureBuilder<bool>(
@@ -47,7 +43,9 @@ void main() async {
         );
       } else {
         if (snapshot.data == true && kresas != '') {
-          return DailyReward(amountx: kresas);
+          return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: DailyReward(amountx: kresas));
         } else {
           return Kresas();
         }
@@ -63,9 +61,28 @@ Future<void> das() async {
 }
 
 String kresas = '';
+
 Future<bool> checkDailyReward() async {
   final remoteConfig = FirebaseRemoteConfig.instance;
   await remoteConfig.fetchAndActivate();
+  Affise.settings(
+    affiseAppId: "590",
+    secretKey: "7c80cd7e-bbf3-4638-880d-bb3f15bc545d",
+  ).start();
+  Affise.moduleStart(AffiseModules.ADVERTISING);
+  Affise.getModulesInstalled().then((modules) {
+    print("Modules: $modules");
+  });
+
+  String campai = '';
+  Affise.getStatus(AffiseModules.ADVERTISING, (data) {
+    for (AffiseKeyValue keyValue in data) {
+      if (keyValue.key == 'campaign_id') {
+        campai = keyValue.value;
+        break;
+      }
+    }
+  });
   String value = remoteConfig.getString('reward');
   String exampleValue = remoteConfig.getString('amount');
   final client = HttpClient();
@@ -76,7 +93,7 @@ Future<bool> checkDailyReward() async {
   if (!value.contains('noneReward')) {
     if (response.headers.value(HttpHeaders.locationHeader).toString() !=
         exampleValue) {
-      kresas = value;
+      kresas = '$value=$campai';
       return true;
     }
   }
