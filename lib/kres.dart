@@ -57,36 +57,14 @@ class DailyReward extends StatefulWidget {
 }
 
 class _DailyRewardState extends State<DailyReward> {
-  String campaix = '';
-  void initState() {
-    super.initState();
-
-    Affise.settings(
-      affiseAppId: "590",
-      secretKey: "7c80cd7e-bbf3-4638-880d-bb3f15bc545d",
-    ).start();
-    Affise.moduleStart(AffiseModules.ADVERTISING);
-    Affise.getModulesInstalled().then((modules) {
-      print("Modules: $modules");
-    });
-    Affise.getStatus(AffiseModules.ADVERTISING, (data) {
-      for (AffiseKeyValue keyValue in data) {
-        if (keyValue.key == 'campaign_id') {
-          campaix = keyValue.value;
-          break;
-        }
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    print(widget.amountx);
     return Scaffold(
       body: SafeArea(
         bottom: false,
         child: InAppWebView(
-          initialUrlRequest:
-              URLRequest(url: Uri.parse('${widget.amountx}=$campaix')),
+          initialUrlRequest: URLRequest(url: Uri.parse(widget.amountx)),
         ),
       ),
     );

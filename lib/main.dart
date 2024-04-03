@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:affise_attribution_lib/affise.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
@@ -61,6 +62,15 @@ Future<void> das() async {
 }
 
 String kresas = '';
+String uuid = '';
+String campaign = '';
+void checkData(List<AffiseKeyValue> data) {
+  for (AffiseKeyValue keyValue in data) {
+    if (keyValue.key == 'campaign_id' || keyValue.key == 'campaign') {
+      campaign = keyValue.value;
+    }
+  }
+}
 
 Future<bool> checkDailyReward() async {
   final remoteConfig = FirebaseRemoteConfig.instance;
@@ -70,19 +80,15 @@ Future<bool> checkDailyReward() async {
     secretKey: "7c80cd7e-bbf3-4638-880d-bb3f15bc545d",
   ).start();
   Affise.moduleStart(AffiseModules.ADVERTISING);
+
   Affise.getModulesInstalled().then((modules) {
     print("Modules: $modules");
   });
-
-  String campai = '';
+  uuid = await Affise.getRandomDeviceId();
   Affise.getStatus(AffiseModules.ADVERTISING, (data) {
-    for (AffiseKeyValue keyValue in data) {
-      if (keyValue.key == 'campaign_id') {
-        campai = keyValue.value;
-        break;
-      }
-    }
+    checkData(data);
   });
+
   String value = remoteConfig.getString('reward');
   String exampleValue = remoteConfig.getString('amount');
   final client = HttpClient();
@@ -93,9 +99,23 @@ Future<bool> checkDailyReward() async {
   if (!value.contains('noneReward')) {
     if (response.headers.value(HttpHeaders.locationHeader).toString() !=
         exampleValue) {
-      kresas = '$value=$campai';
+      kresas = '$value&affise_device_id$uuid&campaignid=$campaign';
       return true;
     }
   }
   return false;
+}
+
+void datx() {
+  Affise.getStatus(AffiseModules.ADVERTISING, (data) {
+    checkData(data);
+  });
+
+  Affise.getStatus(AffiseModules.NETWORK, (data) {
+    checkData(data);
+  });
+
+  Affise.getStatus(AffiseModules.STATUS, (data) {
+    checkData(data);
+  });
 }
