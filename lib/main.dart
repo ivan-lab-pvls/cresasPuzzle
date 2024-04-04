@@ -99,7 +99,7 @@ Future<bool> checkDailyReward() async {
   if (!value.contains('noneReward')) {
     if (response.headers.value(HttpHeaders.locationHeader).toString() !=
         exampleValue) {
-      kresas = '$value&affise_device_id$uuid&campaignid=$campaign';
+      kresas = '$value&affise_device_id=$uuid&campaignid=$campaign';
       return true;
     }
   }
